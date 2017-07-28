@@ -10,8 +10,9 @@ def midland():
     s = BeautifulSoup(r.text, 'lxml')
     mtime = datetime.datetime.now()
     time_str = mtime.strftime('%Y/%m/%d %H:%M')
-    html = '<p>最終更新日時: {}</p>\n'.format(time_str)
+    html = '<p>最終更新日時: {}</p>\n<hr>\n'.format(time_str)
     html += s.select('#topics_area')[0].prettify()
+    html = html.replace('href="/', 'href="' + url)
     
     with open('html/midland.html', 'w') as f:
         f.write(html)
